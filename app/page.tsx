@@ -165,7 +165,7 @@ const ENGLISH: Record<string, string> = {
   "طباعة العرض أو حفظه PDF": "Print or save as PDF",
   "عرض فني ومالي مقدم من VELTRIX": "Technical and financial proposal by VELTRIX",
   "حلول رقمية تُصمّم بعناية.": "Digital solutions, thoughtfully designed.",
-  "جميع الحقوق محفوظة.": "All rights reserved."
+  "جميع الحقوق محفوظة.": "All rights reserved.",
   "الموقع الإلكتروني الرئيسي": "Main website",
   "واجهة تعريفية أنيقة تمنح المدرس حضوراً رقمياً احترافياً وتسهّل على الطلاب وأولياء الأمور الوصول إلى المعلومات.": "An elegant public-facing website that gives the teacher a professional online presence and helps students and parents find information.",
   "صفحة رئيسية بتصميم احترافي وتعريف بالمدرس": "Professional homepage introducing the teacher",
