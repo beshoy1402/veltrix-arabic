@@ -52,7 +52,7 @@ const faqs = [
 ];
 
 
-const ENGLISH = {
+const ENGLISH: Record<string, string> = {
   "عرض فني ومالي مخصص لتطوير منصة تعليمية متكاملة": "A tailored technical and financial proposal for an integrated education platform",
   "مقدم من": "Presented by",
   "نظرة عامة": "Overview",
