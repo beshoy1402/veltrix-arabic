@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDown, ArrowLeft, ArrowUpLeft, BookOpen, CalendarDays, Check,
   ChevronDown, ClipboardCheck, FileSpreadsheet, GraduationCap, Headphones,
@@ -51,7 +51,151 @@ const faqs = [
   ["هل يشمل سعر الصيانة إضافة خصائص جديدة؟", "باقة الصيانة تشمل الإصلاحات والفحوصات والتحديثات المتوافقة والدعم والتعديلات البسيطة للمحتوى. أما إضافة أنظمة أو خصائص جديدة كبيرة فتُقدّر بصورة مستقلة."]
 ];
 
+
+const ENGLISH = {
+  "عرض فني ومالي مخصص لتطوير منصة تعليمية متكاملة": "A tailored technical and financial proposal for an integrated education platform",
+  "مقدم من": "Presented by",
+  "نظرة عامة": "Overview",
+  "المميزات": "Features",
+  "الأسعار": "Pricing",
+  "الصيانة": "Maintenance",
+  "الشروط": "Terms",
+  "مناقشة العرض": "Discuss proposal",
+  "عرض فني ومالي": "Technical & financial proposal",
+  "منصة تعليمية متكاملة": "Integrated education platform",
+  "إدارة تعليمك،": "Manage your teaching,",
+  "بأسلوب أكثر ذكاءً.": "the smarter way.",
+  "منصة رقمية متكاملة تجمع إدارة المراكز التعليمية والحصص الخاصة والطلاب وأولياء الأمور والعمليات المالية في تجربة واحدة أنيقة وسهلة الاستخدام.": "An integrated digital platform bringing learning centers, private lessons, students, parents, and financial operations together in one elegant, easy-to-use experience.",
+  "اكتشف تفاصيل المنصة": "Explore the platform",
+  "عرض باقة الصيانة": "View maintenance plan",
+  "واجهة عربية بالكامل": "Arabic-first interface",
+  "متوافق مع الهاتف": "Mobile friendly",
+  "إدارة مركزية": "Centralized management",
+  "لوحة تحكم المدرس": "Teacher dashboard",
+  "ملخص الأداء": "Performance overview",
+  "إجمالي الطلاب": "Total students",
+  "المجموعات النشطة": "Active groups",
+  "نظرة على الأداء": "Performance overview",
+  "آخر ٦ أشهر": "Last 6 months",
+  "الحضور والالتزام": "Attendance & engagement",
+  "مؤشرات محدثة": "Updated indicators",
+  "منظومة تعليمية": "Education platform",
+  "كل التفاصيل في مكان واحد": "Everything in one place",
+  "متابعة لحظية": "Real-time tracking",
+  "تقارير وبيانات منظمة": "Organized reports and data",
+  "عرض المنصة": "Platform proposal",
+  "الفكرة باختصار": "At a glance",
+  "منظومة واحدة.": "One platform.",
+  "إدارة بلا تعقيد.": "Management without complexity.",
+  "سواء كنت تدرّس داخل أكثر من مركز أو تقدم حصصاً خاصة، تمنحك المنصة رؤية واضحة لكل طالب وحصة وموعد ومعاملة مالية، مع بوابات مخصصة للطلاب وأولياء الأمور.": "Whether you teach at multiple centers or offer private lessons, the platform gives you a clear view of every student, lesson, schedule, and financial transaction, with dedicated student and parent portals.",
+  "إدارة عدة مراكز": "Manage multiple centers",
+  "ملفات طلاب موحّدة": "Unified student profiles",
+  "متابعة مالية دقيقة": "Accurate financial tracking",
+  "نطاق العمل والمميزات": "Scope & features",
+  "كل ما تحتاجه لإدارة": "Everything you need to manage",
+  "منظومتك التعليمية.": "your education business.",
+  "تفاصيل الوظائف والخصائص المقترحة ضمن المنصة، منظمة في أقسام واضحة وقابلة للمراجعة والاعتماد.": "Proposed platform functions and features, organized into clear sections for review and approval.",
+  "تفاصيل الخصائص والأنظمة": "Feature and system details",
+  "طيّ جميع الأقسام": "Collapse all sections",
+  "عرض جميع التفاصيل": "Show all details",
+  "خصائص": "features",
+  "تجربة لكل مستخدم": "A role for every user",
+  "كل شخص يرى": "Everyone sees",
+  "ما يخصّه فقط.": "only what they need.",
+  "صلاحيات واضحة وتجربة مناسبة لكل دور، مع حماية خصوصية بيانات الطلاب وأولياء الأمور.": "Clear permissions and a tailored experience for each role, while protecting student and parent privacy.",
+  "منصة واحدة": "One platform",
+  "تجربة مترابطة": "Connected experience",
+  "الطلاب": "Students",
+  "المساعد": "Assistant",
+  "المالية": "Finance",
+  "أولياء الأمور": "Parents",
+  "الاستثمار في المنصة": "Platform investment",
+  "تكلفة واضحة.": "Clear pricing.",
+  "قيمة قابلة للتطوير.": "Value that can grow.",
+  "يتم تحديد السعر النهائي بعد اعتماد التفاصيل والأولويات الفنية، مع فصل تكلفة التطوير عن باقة الصيانة.": "The final price is confirmed after the scope and technical priorities are approved. Development and maintenance are priced separately.",
+  "تكلفة تصميم وتطوير المنصة": "Platform design & development",
+  "منظومة تعليمية متكاملة": "An integrated education platform",
+  "مصممة لطريقة عملك.": "built around how you work.",
+  "يشمل السعر تنفيذ نطاق العمل والخصائص الموضحة في هذا العرض بعد اعتمادها.": "Includes implementation of the approved scope and features described in this proposal.",
+  "السعر التقديري للمشروع": "Estimated project price",
+  "يُحدد السعر النهائي بعد اعتماد النطاق": "Final price confirmed after scope approval",
+  "باقة الصيانة والدعم الفني لمدة 3 أشهر:": "3-month maintenance and technical support package:",
+  "استمرارية وراحة بال": "Continuity & peace of mind",
+  "الدعم لا يتوقف": "Support doesn't stop",
+  "عند التسليم.": "at handover.",
+  "لضمان استمرار عمل المنصة بكفاءة، نوفر باقة صيانة ودعم فني لمدة ثلاثة أشهر تشمل المتابعة والإصلاحات والخدمات الموضحة أدناه.": "To keep the platform running smoothly, we offer a three-month maintenance and support package covering monitoring, fixes, and the services below.",
+  "دعم فني": "Technical support",
+  "ومتابعة دورية": "& regular monitoring",
+  "باقة الصيانة والدعم الفني": "Maintenance & technical support",
+  "ثلاثة أشهر من": "Three months of",
+  "الاهتمام المستمر.": "ongoing care.",
+  "خدمات متابعة وصيانة للحفاظ على استقرار الموقع وسلامة وظائفه.": "Monitoring and maintenance services to keep the website stable and its features working correctly.",
+  "السعر الإجمالي": "Total price",
+  "لمدة 3 أشهر": "For 3 months",
+  "تبدأ المدة من تاريخ بدء الصيانة المتفق عليه": "The period starts on the agreed maintenance start date",
+  "دعم فني ومتابعة خلال فترة الباقة": "Technical support throughout the package period",
+  "من الفكرة إلى التشغيل": "From concept to launch",
+  "خطوات واضحة.": "Clear steps.",
+  "نتيجة مدروسة.": "A considered result.",
+  "نعمل وفق مراحل منظمة لضمان وضوح نطاق العمل ومراجعة التفاصيل قبل الإطلاق.": "We follow an organized process to clarify the scope and review details before launch.",
+  "اعتماد نطاق العمل": "Approve the scope",
+  "مراجعة الخصائص والتفاصيل والاتفاق على الأولويات.": "Review features and details, then agree on priorities.",
+  "التصميم والتطوير": "Design & development",
+  "تصميم الواجهات وتنفيذ الأنظمة والوظائف المعتمدة.": "Design the interfaces and implement the approved systems and functions.",
+  "الاختبار والمراجعة": "Testing & review",
+  "مراجعة تجربة الاستخدام والوظائف والصلاحيات.": "Review usability, functionality, and permissions.",
+  "التسليم والتشغيل": "Handover & launch",
+  "إطلاق المنصة وبدء فترة الصيانة المتفق عليها.": "Launch the platform and begin the agreed maintenance period.",
+  "توضيحات مهمة": "Important notes",
+  "تفاصيل تحفظ": "Details that protect",
+  "وضوح الاتفاق.": "clarity of agreement.",
+  "نحرص على توضيح حدود العرض وما يتضمنه قبل بدء التنفيذ.": "We clarify the proposal boundaries and inclusions before development begins.",
+  "نطاق التطوير": "Development scope",
+  "حدود الصيانة": "Maintenance boundaries",
+  "الخدمات الخارجية": "Third-party services",
+  "التعديلات الإضافية": "Additional changes",
+  "إجابات سريعة": "Quick answers",
+  "أسئلة قد": "Questions you may",
+  "تكون في بالك.": "have in mind.",
+  "إذا كانت هناك تفاصيل أخرى ترغب في مناقشتها، يسعدنا توضيحها قبل اعتماد العرض.": "If you would like to discuss anything else, we will be happy to clarify it before approval.",
+  "الخطوة التالية": "The next step",
+  "لنحوّل إدارة العملية التعليمية": "Let's make education management",
+  "إلى تجربة أكثر سهولة.": "a simpler experience.",
+  "يسعدنا مناقشة تفاصيل العرض والإجابة عن أي استفسارات، ثم اعتماد نطاق العمل تمهيداً لبدء التنفيذ.": "We would be glad to discuss the proposal, answer your questions, and finalize the scope before implementation begins.",
+  "طباعة العرض أو حفظه PDF": "Print or save as PDF",
+  "عرض فني ومالي مقدم من VELTRIX": "Technical and financial proposal by VELTRIX",
+  "حلول رقمية تُصمّم بعناية.": "Digital solutions, thoughtfully designed.",
+  "جميع الحقوق محفوظة.": "All rights reserved."
+};
+
 export default function Home() {
+  const [language, setLanguage] = useState<"ar" | "en">("ar");
+  useEffect(() => {
+    const root = document.querySelector("main");
+    if (!root) return;
+    root.setAttribute("dir", language === "ar" ? "rtl" : "ltr");
+    root.setAttribute("lang", language);
+    const translate = () => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let node: Node | null;
+      while ((node = walker.nextNode())) {
+        const value = node.nodeValue?.trim();
+        if (!value) continue;
+        const parent = node.parentElement;
+        if (!parent || parent.closest("script,style")) continue;
+        if (language === "en" && ENGLISH[value]) node.nodeValue = node.nodeValue!.replace(value, ENGLISH[value]);
+        else if (language === "ar") {
+          const englishEntry = Object.entries(ENGLISH).find(([, translated]) => translated === value);
+          if (englishEntry) node.nodeValue = node.nodeValue!.replace(value, englishEntry[0]);
+        }
+      }
+    };
+    translate();
+    const observer = new MutationObserver(translate);
+    observer.observe(root, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, [language]);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [expanded, setExpanded] = useState<string[]>(["public", "management"]);
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
@@ -69,7 +213,7 @@ export default function Home() {
           <a href="#maintenance" onClick={() => setMenuOpen(false)}>الصيانة</a>
           <a href="#terms" onClick={() => setMenuOpen(false)}>الشروط</a>
         </nav>
-        <div className="nav-actions"><a className="nav-cta" href="#contact">مناقشة العرض <ArrowLeft size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة">{menuOpen ? <X/> : <Menu/>}</button></div>
+        <div className="nav-actions"><button className="language-toggle" onClick={() => setLanguage(v => v === "ar" ? "en" : "ar")} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}</button><a className="nav-cta" href="#contact">مناقشة العرض <ArrowLeft size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة">{menuOpen ? <X/> : <Menu/>}</button></div>
       </header>
 
       <section className="hero wrap" id="top">
