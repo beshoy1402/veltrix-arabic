@@ -67,3 +67,45 @@
 @media (max-width: 720px) {
   .language-toggle { padding: 8px 11px; min-width: 48px; }
 }
+
+
+/* Bilingual layout refinements */
+main[dir="ltr"] { direction: ltr; }
+main[dir="ltr"] .announcement { direction: ltr; }
+main[dir="ltr"] .hero,
+main[dir="ltr"] .overview-grid,
+main[dir="ltr"] .section-heading,
+main[dir="ltr"] .feature-intro,
+main[dir="ltr"] .portal-grid,
+main[dir="ltr"] .maintenance-heading,
+main[dir="ltr"] .maintenance-card-top,
+main[dir="ltr"] .process-grid,
+main[dir="ltr"] .terms-grid,
+main[dir="ltr"] .faq-grid,
+main[dir="ltr"] .closing-card,
+main[dir="ltr"] .footer-inner { direction: ltr; }
+main[dir="ltr"] .feature-trigger,
+main[dir="ltr"] .feature-content-inner,
+main[dir="ltr"] .role-row,
+main[dir="ltr"] .maintenance-service,
+main[dir="ltr"] .maintenance-foot { direction: ltr; }
+main[dir="ltr"] .feature-title-wrap,
+main[dir="ltr"] .feature-item,
+main[dir="ltr"] .role-row > div,
+main[dir="ltr"] .maintenance-service > div,
+main[dir="ltr"] .term-card,
+main[dir="ltr"] .faq-item,
+main[dir="ltr"] .project-price-card,
+main[dir="ltr"] .pricing-separate-note { text-align: left; }
+main[dir="ltr"] .project-price-value { border-right: 0; border-left: 1px solid var(--line); }
+main[dir="ltr"] .pricing-separate-note { border-right: 0; border-left: 3px solid var(--accent); }
+main[dir="ltr"] .feature-item > span { margin-right: 8px; margin-left: 0; }
+main[dir="ltr"] .role-row > svg { margin-left: auto; margin-right: 0; }
+main[dir="ltr"] .faq-item button { direction: ltr; text-align: left; }
+main[dir="ltr"] .faq-item button svg { margin-left: auto; margin-right: 0; }
+main[dir="ltr"] .hero-index { direction: ltr; }
+main[dir="ltr"] .hero-meta,
+main[dir="ltr"] .overview-points { direction: ltr; }
+@media (max-width: 700px) {
+  main[dir="ltr"] .project-price-value { border-left: 0; }
+}
