@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import {
-  ArrowDown, ArrowLeft, ArrowUpLeft, BookOpen, CalendarDays, Check,
+  ArrowDown, ArrowLeft, ArrowRight, BookOpen, CalendarDays, Check,
   ChevronDown, ClipboardCheck, FileSpreadsheet, GraduationCap, Headphones,
   LayoutDashboard, Menu, MessageCircle, Monitor, ShieldCheck, Sparkles,
   Wallet, Users, X, Building2, BrainCircuit, ChartNoAxesCombined, Clock3,
@@ -367,6 +367,7 @@ export default function Home() {
   const [expanded, setExpanded] = useState<string[]>(["public", "management"]);
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const toggle = (id: string) => setExpanded(v => v.includes(id) ? v.filter(x => x !== id) : [...v, id]);
+  const DirectionArrow = language === "ar" ? ArrowLeft : ArrowRight;
 
   return (
     <main>
@@ -380,7 +381,7 @@ export default function Home() {
           <a href="#maintenance" onClick={() => setMenuOpen(false)}>الصيانة</a>
           <a href="#terms" onClick={() => setMenuOpen(false)}>الشروط</a>
         </nav>
-        <div className="nav-actions"><button className="language-toggle" onClick={() => setLanguage(v => v === "ar" ? "en" : "ar")} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}</button><a className="nav-cta" href="#contact">مناقشة العرض <ArrowLeft size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة">{menuOpen ? <X/> : <Menu/>}</button></div>
+        <div className="nav-actions"><button className="language-toggle" onClick={() => setLanguage(v => v === "ar" ? "en" : "ar")} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}</button><a className="nav-cta" href="#contact">مناقشة العرض <DirectionArrow size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة">{menuOpen ? <X/> : <Menu/>}</button></div>
       </header>
 
       <section className="hero wrap" id="top">
@@ -388,7 +389,7 @@ export default function Home() {
           <div className="eyebrow"><span className="eyebrow-line"/> عرض فني ومالي <span className="eyebrow-dot">✳</span> منصة تعليمية متكاملة</div>
           <h1>إدارة تعليمك،<br/><em>بأسلوب أكثر ذكاءً.</em></h1>
           <p className="hero-lead">منصة رقمية متكاملة تجمع إدارة المراكز التعليمية والحصص الخاصة والطلاب وأولياء الأمور والعمليات المالية في تجربة واحدة أنيقة وسهلة الاستخدام.</p>
-          <div className="hero-actions"><a className="btn-primary" href="#features">اكتشف تفاصيل المنصة <ArrowLeft size={17}/></a><a className="btn-quiet" href="#maintenance">عرض باقة الصيانة <ArrowDown size={16}/></a></div>
+          <div className="hero-actions"><a className="btn-primary" href="#features">اكتشف تفاصيل المنصة <DirectionArrow size={17}/></a><a className="btn-quiet" href="#maintenance">عرض باقة الصيانة <ArrowDown size={16}/></a></div>
           <div className="hero-meta"><span><Check size={15}/> واجهة عربية بالكامل</span><span><Check size={15}/> متوافق مع الهاتف</span><span><Check size={15}/> إدارة مركزية</span></div>
         </div>
         <div className="hero-art" aria-label="تصميم توضيحي للوحة تحكم تعليمية">
@@ -433,7 +434,7 @@ export default function Home() {
 
       <section className="faq-section"><div className="wrap faq-grid"><div><span className="section-kicker">إجابات سريعة</span><h2>أسئلة قد<br/><em>تكون في بالك.</em></h2><p>إذا كانت هناك تفاصيل أخرى ترغب في مناقشتها، يسعدنا توضيحها قبل اعتماد العرض.</p></div><div className="faq-list">{faqs.map(([q,a],i)=><div className={faqOpen===i?"faq-item open":"faq-item"} key={q}><button onClick={()=>setFaqOpen(faqOpen===i?null:i)}><b>{q}</b><ChevronDown size={18}/></button>{faqOpen===i&&<p>{a}</p>}</div>)}</div></div></section>
 
-      <section className="closing wrap" id="contact"><div className="closing-card"><div className="closing-decoration">✳</div><span className="section-kicker">الخطوة التالية</span><h2>لنحوّل إدارة العملية التعليمية<br/><em>إلى تجربة أكثر سهولة.</em></h2><p>يسعدنا مناقشة تفاصيل العرض والإجابة عن أي استفسارات، ثم اعتماد نطاق العمل تمهيداً لبدء التنفيذ.</p><div className="closing-actions"><a href="mailto:?subject=استفسار%20حول%20عرض%20المنصة%20التعليمية" className="btn-primary">مناقشة العرض <ArrowLeft size={17}/></a><button className="btn-outline" onClick={()=>window.print()}><Printer size={16}/> طباعة العرض أو حفظه PDF</button></div><small className="closing-note">عرض فني ومالي مقدم من VELTRIX</small></div></section>
+      <section className="closing wrap" id="contact"><div className="closing-card"><div className="closing-decoration">✳</div><span className="section-kicker">الخطوة التالية</span><h2>لنحوّل إدارة العملية التعليمية<br/><em>إلى تجربة أكثر سهولة.</em></h2><p>يسعدنا مناقشة تفاصيل العرض والإجابة عن أي استفسارات، ثم اعتماد نطاق العمل تمهيداً لبدء التنفيذ.</p><div className="closing-actions"><a href="mailto:?subject=استفسار%20حول%20عرض%20المنصة%20التعليمية" className="btn-primary">مناقشة العرض <DirectionArrow size={17}/></a><button className="btn-outline" onClick={()=>window.print()}><Printer size={16}/> طباعة العرض أو حفظه PDF</button></div><small className="closing-note">عرض فني ومالي مقدم من VELTRIX</small></div></section>
 
       <footer className="footer"><div className="wrap footer-inner"><a className="brand footer-brand" href="#top"><span className="brand-mark">V</span><span>VELTRIX<small> DIGITAL EXPERIENCES</small></span></a><span>حلول رقمية تُصمّم بعناية.</span><span>© {new Date().getFullYear()} VELTRIX. جميع الحقوق محفوظة.</span></div></footer>
     </main>
