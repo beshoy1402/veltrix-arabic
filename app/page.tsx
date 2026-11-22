@@ -358,8 +358,12 @@ export default function Home() {
       }
     };
     translate();
-    const observer = new MutationObserver(translate);
-    observer.observe(root, { childList: true, subtree: true, characterData: true });
+    // Watch newly-rendered sections only. Avoid observing characterData because
+    // translating a text node would otherwise trigger another observer pass.
+    const observer = new MutationObserver((records) => {
+      if (records.some((record) => record.addedNodes.length > 0)) translate();
+    });
+    observer.observe(root, { childList: true, subtree: true });
     return () => observer.disconnect();
   }, [language]);
 
@@ -374,14 +378,14 @@ export default function Home() {
       <div className="announcement"><span className="pulse" /> عرض فني ومالي مخصص لتطوير منصة تعليمية متكاملة <span className="ann-sep">✦</span> مقدم من <b>VELTRIX</b></div>
       <header className="nav wrap">
         <a className="brand" href="#top" aria-label="VELTRIX"><span className="brand-mark">V</span><span>VELTRIX<small> DIGITAL EXPERIENCES</small></span></a>
-        <nav className={menuOpen ? "nav-links open" : "nav-links"}>
+        <nav id="primary-navigation" className={menuOpen ? "nav-links open" : "nav-links"}>
           <a href="#overview" onClick={() => setMenuOpen(false)}>نظرة عامة</a>
           <a href="#features" onClick={() => setMenuOpen(false)}>المميزات</a>
           <a href="#pricing" onClick={() => setMenuOpen(false)}>الأسعار</a>
           <a href="#maintenance" onClick={() => setMenuOpen(false)}>الصيانة</a>
           <a href="#terms" onClick={() => setMenuOpen(false)}>الشروط</a>
         </nav>
-        <div className="nav-actions"><button className="language-toggle" onClick={() => setLanguage(v => v === "ar" ? "en" : "ar")} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}</button><a className="nav-cta" href="#contact">مناقشة العرض <DirectionArrow size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة">{menuOpen ? <X/> : <Menu/>}</button></div>
+        <div className="nav-actions"><button className="language-toggle" onClick={() => setLanguage(v => v === "ar" ? "en" : "ar")} aria-label="Switch language">{language === "ar" ? "EN" : "عربي"}</button><a className="nav-cta" href="#contact">مناقشة العرض <DirectionArrow size={15}/></a><button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="فتح القائمة" aria-expanded={menuOpen} aria-controls="primary-navigation">{menuOpen ? <X/> : <Menu/>}</button></div>
       </header>
 
       <section className="hero wrap" id="top">
